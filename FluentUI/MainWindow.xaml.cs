@@ -1,86 +1,101 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿// MainWindow.xaml.cs
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using System;
 
 namespace FluentUI
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainWindow : Window
     {
+        float firstNumber, secondNumber;
+        int operators = -1;
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
-        private void btn1_Click(object sender, RoutedEventArgs e)
+        private void NumberButton_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            string number = button.Content.ToString();
 
+            if (ResultTextBox.Text == "0")
+            {
+                ResultTextBox.Text = number;
+            }
+            else
+            {
+                ResultTextBox.Text += number;
+            }
         }
-        private void btn2_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-        private void btn3_Click(object sender, RoutedEventArgs e)
+        private void OperatorButton_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            string op = button.Content.ToString(); // 獲取運算符 (+, −, ×, ÷)
+            // 這裡可以加入您的邏輯來儲存當前值和運算符
+            switch (op)
+            {
+                case "+":
+                    firstNumber = Convert.ToSingle(ResultTextBox.Text); //將輸入文字框轉換成浮點數，存入第一個數字的全域變數
+                    operators = 0; //選擇「加」號
+                    break;
+                case "−":
+                    firstNumber = Convert.ToSingle(ResultTextBox.Text); //將輸入文字框轉換成浮點數，存入第一個數字的全域變數
+                    operators = 1;
+                    break;
+                case "×":
+                    firstNumber = Convert.ToSingle(ResultTextBox.Text); //將輸入文字框轉換成浮點數，存入第一個數字的全域變數
+                    operators = 2;
+                    break;
+                case "÷":
+                    firstNumber = Convert.ToSingle(ResultTextBox.Text); //將輸入文字框轉換成浮點數，存入第一個數字的全域變數                    operators = 3;
+                    operators = 3;
+                    break;
+            }
+            ResultTextBox.Text = "0"; //重新將輸入文字框重新設定為0
+        }
 
-        }
-        private void btn4_Click(object sender, RoutedEventArgs e)
+        // 處理等號按鈕 (=) 的點擊事件
+        private void EqualButton_Click(object sender, RoutedEventArgs e)
         {
+            float finalResults = 0f; //宣告最後計算結果變數
+            secondNumber = Convert.ToSingle(ResultTextBox.Text); //將輸入文字框轉換成浮點數，存入第二個數字的全域變數
 
-        }
-        private void btn5_Click(object sender, RoutedEventArgs e)
-        {
+            //依照四則運算符號的選擇，進行加減乘除
+            switch (operators)
+            {
+                case 0:
+                    finalResults = firstNumber + secondNumber;
+                    break;
+                case 1:
+                    finalResults = firstNumber - secondNumber;
+                    break;
+                case 2:
+                    finalResults = firstNumber * secondNumber;
+                    break;
+                case 3:
+                    finalResults = firstNumber / secondNumber;
+                    break;
+            }
 
-        }
-        private void btn6_Click(object sender, RoutedEventArgs e)
-        {
+            ResultTextBox.Text = string.Format("{0:0.##########}", finalResults); //在輸入文字框中，顯示最後計算結果，並且轉換成格式化的字串內容
 
+            //重置所有全域變數
+            firstNumber = 0f;
+            secondNumber = 0f;
+            operators = -1;
         }
-        private void btn7_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-        private void btn8_Click(object sender, RoutedEventArgs e)
+        // 處理清除按鈕 (C) 的點擊事件
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
+            ResultTextBox.Text = "0"; // 重設顯示
 
-        }
-        private void btn9_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void btn0_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            ((Button)sender).Content = "�w�I���I";
-        }
-        private void btnMinus_Click(object sender, RoutedEventArgs e)
-        {
-            ((Button)sender).Content = "�w�I���I";
-        }
-        private void btnPlus_Click(object sender, RoutedEventArgs e)
-        {
-            ((Button)sender).Content = "�w�I���I";
-        }private void btnDivide_Click(object sender, RoutedEventArgs e)
-        {
-            ((Button)sender).Content = "�w�I���I";
+            // 重設任何儲存的計算狀態
+            firstNumber = 0f;
+            secondNumber = 0f;
+            operators = -1;
         }
     }
 }

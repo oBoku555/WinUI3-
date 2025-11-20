@@ -7,29 +7,56 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="FluentUI">
-    
+    Title="計算機">
+
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
-    <Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox>    </TextBox>
-            <Button x:Name="addButton" Click="btn1_Click">1</Button>
-            <Button x:Name="addButton" Click="btn2_Click">2</Button>
-            <Button x:Name="addButton" Click="btn3_Click">3</Button>
-            <Button x:Name="addButton" Click="btn4_Click">4</Button>
-            <Button x:Name="addButton" Click="btn5_Click">5</Button>
-            <Button x:Name="addButton" Click="btn6_Click">6</Button>
-            <Button x:Name="addButton" Click="btn7_Click">7</Button>
-            <Button x:Name="addButton" Click="btn8_Click">8</Button>
-            <Button x:Name="addButton" Click="btn9_Click">9</Button>
-            <Button x:Name="addButton" Click="btn0_Click">0</Button>
 
-            <Button x:Name="addButton" Click="btnAdd_Click">+</Button>
-            <Button x:Name="minusButton" Click="btnMinus_Click">-</Button>
-            <Button x:Name="plusButton" Click="btnPlus_Click">*</Button>
-            <Button x:Name="divideButton" Click="btnDivide_Click">/</Button>
-        </StackPanel>
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox 
+            x:Name="ResultTextBox"
+            Grid.Row="0"
+            Grid.ColumnSpan="4"
+            TextAlignment="Right"
+            FontSize="36"
+            IsReadOnly="True"
+            Margin="0,0,0,10"
+            Text="0" />
+
+        <Button x:Name="sevenButton" Content="7" FontSize="25" Grid.Row="1" Grid.Column="0" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="eightButton" Content="8" FontSize="25" Grid.Row="1" Grid.Column="1" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="nineButton" Content="9" FontSize="25" Grid.Row="1" Grid.Column="2" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="divideButton" Content="÷" FontSize="25" Grid.Row="1" Grid.Column="3" Click="OperatorButton_Click" Margin="5" Background="#FF60A5FA" Foreground="White"/>
+
+        <Button x:Name="fourButton" Content="4" FontSize="25" Grid.Row="2" Grid.Column="0" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="fiveButton" Content="5" FontSize="25" Grid.Row="2" Grid.Column="1" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="sixButton" Content="6" FontSize="25" Grid.Row="2" Grid.Column="2" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="multiplyButton" Content="×" FontSize="25" Grid.Row="2" Grid.Column="3" Click="OperatorButton_Click" Margin="5" Background="#FF60A5FA" Foreground="White"/>
+
+        <Button x:Name="oneButton" Content="1" FontSize="25" Grid.Row="3" Grid.Column="0" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="twoButton" Content="2" FontSize="25" Grid.Row="3" Grid.Column="1" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="threeButton" Content="3" FontSize="25" Grid.Row="3" Grid.Column="2" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="minusButton" Content="−" FontSize="25" Grid.Row="3" Grid.Column="3" Click="OperatorButton_Click" Margin="5" Background="#FF60A5FA" Foreground="White"/>
+
+        <Button x:Name="clearButton" Content="C" FontSize="25" Grid.Row="4" Grid.Column="0" Click="ClearButton_Click" Margin="5" Background="#FFEF4444" Foreground="White"/>
+        <Button x:Name="zeroButton" Content="0" FontSize="25" Grid.Row="4" Grid.Column="1" Click="NumberButton_Click" Margin="5"/>
+        <Button x:Name="equalButton" Content="=" FontSize="25" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Click="EqualButton_Click" Margin="5" Background="#FF10B981" Foreground="White"/>
+        <Button x:Name="addButton" Content="+" FontSize="25" Grid.Row="4" Grid.Column="3" Click="OperatorButton_Click" Margin="5" Background="#FF60A5FA" Foreground="White"/>
     </Grid>
 </Window>
